@@ -56,9 +56,10 @@ app.put('/upload/:tipo/:id', function(req, res) {
 	}
 
 	let nombreArchivo=`${id}-${new Date().getMilliseconds()}.${extension}`;
+	let pathToMoveImg=path.resolve(__dirname, `../../uploads/${tipo}/${nombreArchivo}`);
 
 	// Use the mv() method to place the file somewhere on your server
-	archivo.mv(`${nombreArchivo}`, (err)=>{
+	archivo.mv(pathToMoveImg, (err)=>{
 		if (err){
 			return res.status(500).json({
 				ok: false,
